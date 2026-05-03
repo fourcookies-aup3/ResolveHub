@@ -11,6 +11,8 @@ import Analyzer from "./pages/Analyzer";
 import Forum from "./pages/Forum";
 import ThreadDetail from "./pages/ThreadDetail";
 import Auth from "./pages/Auth";
+import Pro from "./pages/Pro";
+import Luts from "./pages/Luts";
 
 const queryClient = new QueryClient();
 
@@ -28,6 +30,8 @@ const App = () => (
           <Route path="/forum" element={<Forum />} />
           <Route path="/forum/:id" element={<ThreadDetail />} />
           <Route path="/auth" element={<Auth />} />
+          <Route path="/pro" element={<Pro />} />
+          <Route path="/luts" element={<Luts />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
