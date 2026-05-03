@@ -1,18 +1,20 @@
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
-import { Aperture, LogOut } from "lucide-react";
+import { Aperture, Crown, LogOut } from "lucide-react";
 import { useAuth } from "@/hooks/useAuth";
+import { useIsPro } from "@/hooks/useIsPro";
 import { supabase } from "@/integrations/supabase/client";
 
 const Header = () => {
   const { user } = useAuth();
+  const { isPro } = useIsPro();
   const nav = useNavigate();
 
   const links = [
     { label: "Tutorials", to: "/tutorials" },
     { label: "AI Analyzer", to: "/analyzer" },
+    { label: "LUTs", to: "/luts" },
     { label: "Forum", to: "/forum" },
-    { label: "LUTs", to: "/#luts" },
   ];
 
   return (
@@ -35,15 +37,22 @@ const Header = () => {
         </nav>
         <div className="flex items-center gap-2">
           {user ? (
-            <Button variant="ghost" size="sm" onClick={async () => { await supabase.auth.signOut(); nav("/"); }}>
-              <LogOut className="w-4 h-4 mr-1.5" /> Logout
-            </Button>
+            <>
+              {isPro && (
+                <span className="hidden sm:inline-flex items-center gap-1 text-xs px-2 py-1 rounded-full bg-accent/15 border border-accent/40 text-accent font-medium">
+                  <Crown className="w-3 h-3" /> PRO
+                </span>
+              )}
+              <Button variant="ghost" size="sm" onClick={async () => { await supabase.auth.signOut(); nav("/"); }}>
+                <LogOut className="w-4 h-4 mr-1.5" /> Logout
+              </Button>
+            </>
           ) : (
             <Link to="/auth"><Button variant="ghost" size="sm" className="hidden sm:inline-flex">Login</Button></Link>
           )}
-          <Link to="/analyzer">
-            <Button size="sm" className="bg-gradient-cinematic text-primary-foreground hover:opacity-90 transition-smooth">
-              AI Analyzer
+          <Link to="/pro">
+            <Button size="sm" className="bg-gradient-cinematic text-primary-foreground hover:opacity-90 transition-smooth gap-1">
+              <Crown className="w-3.5 h-3.5" /> Pro
             </Button>
           </Link>
         </div>

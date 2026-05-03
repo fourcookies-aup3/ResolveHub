@@ -1,11 +1,14 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
-import { Sparkles, Upload, Loader2, Download } from "lucide-react";
+import { Sparkles, Upload, Loader2, Download, Crown, Coins } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
+import { useAuth } from "@/hooks/useAuth";
+import { useIsPro } from "@/hooks/useIsPro";
 import { toast } from "sonner";
 
 type Suggestion = {
@@ -16,7 +19,10 @@ type Suggestion = {
   hueVsHue: string;
   steps: { title: string; description: string; node: string }[];
   recommendedLut: { name: string; description: string; strength: string };
+  _meta?: { isPro: boolean; remaining: number | null; limit: number };
 };
+
+const FREE_LIMIT = 3;
 
 const styles = [
   { id: "cinematic-teal-orange", label: "Cinematic Teal & Orange" },
@@ -37,12 +43,31 @@ const fileToDataUrl = (file: File) => new Promise<string>((res, rej) => {
 });
 
 const Analyzer = () => {
+  const { user } = useAuth();
+  const { isPro } = useIsPro();
+  const nav = useNavigate();
   const [imgUrl, setImgUrl] = useState<string | null>(null);
   const [imgData, setImgData] = useState<string | null>(null);
   const [style, setStyle] = useState(styles[0].id);
   const [notes, setNotes] = useState("");
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState<Suggestion | null>(null);
+  const [usedThisMonth, setUsedThisMonth] = useState<number>(0);
+
+  useEffect(() => {
+    (async () => {
+      if (!user) return;
+      const since = new Date(Date.now() - 30 * 24 * 60 * 60 * 1000).toISOString();
+      const { count } = await supabase
+        .from("analyzer_usage")
+        .select("id", { count: "exact", head: true })
+        .eq("user_id", user.id)
+        .gte("created_at", since);
+      setUsedThisMonth(count ?? 0);
+    })();
+  }, [user, result]);
+
+  const remaining = Math.max(0, FREE_LIMIT - usedThisMonth);
 
   const handleFile = async (f: File) => {
     if (f.size > 8 * 1024 * 1024) { toast.error("Bild ist größer als 8 MB."); return; }
@@ -51,14 +76,25 @@ const Analyzer = () => {
   };
 
   const analyze = async () => {
+    if (!user) { toast.error("Bitte einloggen."); nav("/auth"); return; }
     if (!imgData) { toast.error("Bitte zuerst ein Bild hochladen."); return; }
+    if (!isPro && remaining <= 0) {
+      toast.error("Keine Free-Tokens mehr. Upgrade auf Pro für unbegrenzte Analysen.");
+      return;
+    }
     setLoading(true); setResult(null);
     try {
       const { data, error } = await supabase.functions.invoke("analyze-grading", {
         body: { imageBase64: imgData, style: styles.find(s => s.id === style)?.label, notes },
       });
       if (error) throw error;
-      if ((data as any)?.error) throw new Error((data as any).error);
+      if ((data as any)?.error) {
+        if ((data as any).error === "QUOTA_EXCEEDED") {
+          toast.error((data as any).message);
+          return;
+        }
+        throw new Error((data as any).error);
+      }
       setResult(data as Suggestion);
     } catch (e: any) {
       toast.error(e.message || "Analyse fehlgeschlagen");
@@ -81,6 +117,33 @@ const Analyzer = () => {
             Wähle einen Stil, und unsere AI analysiert dein Bild und liefert einen kompletten Schritt-für-Schritt Color-Grading-Plan inkl. LUT-Vorschlag.
           </p>
         </header>
+
+        <div className="mb-6 flex flex-wrap items-center gap-3 p-4 rounded-xl border border-border bg-card">
+          {isPro ? (
+            <>
+              <Badge className="bg-gradient-cinematic text-primary-foreground border-0 gap-1"><Crown className="w-3 h-3" /> PRO</Badge>
+              <span className="text-sm">Unbegrenzte AI-Tokens aktiv.</span>
+            </>
+          ) : user ? (
+            <>
+              <Coins className="w-5 h-5 text-accent" />
+              <span className="text-sm font-medium">{remaining} / {FREE_LIMIT} Free-Tokens übrig</span>
+              <span className="text-xs text-muted-foreground">(reset alle 30 Tage)</span>
+              <div className="flex-1" />
+              <Link to="/pro">
+                <Button size="sm" variant="outline" className="border-accent/40 text-accent hover:bg-accent/10 gap-1">
+                  <Crown className="w-3.5 h-3.5" /> Pro: unbegrenzt
+                </Button>
+              </Link>
+            </>
+          ) : (
+            <>
+              <span className="text-sm text-muted-foreground">Bitte einloggen, um den AI-Analyzer zu nutzen.</span>
+              <div className="flex-1" />
+              <Link to="/auth"><Button size="sm">Login</Button></Link>
+            </>
+          )}
+        </div>
 
         <div className="grid lg:grid-cols-2 gap-8">
           <div className="space-y-5">
@@ -116,8 +179,8 @@ const Analyzer = () => {
 
             <Textarea value={notes} onChange={(e) => setNotes(e.target.value)} placeholder="Optional: Notizen (z.B. Skintones bewahren, mehr Kontrast)" className="bg-card border-border min-h-24" maxLength={500} />
 
-            <Button onClick={analyze} disabled={loading || !imgData} className="bg-gradient-cinematic text-primary-foreground hover:opacity-90 h-12 w-full">
-              {loading ? <><Loader2 className="w-4 h-4 mr-2 animate-spin" /> Analysiere…</> : <><Sparkles className="w-4 h-4 mr-2" /> Color Grading vorschlagen</>}
+            <Button onClick={analyze} disabled={loading || !imgData || (!isPro && !!user && remaining <= 0)} className="bg-gradient-cinematic text-primary-foreground hover:opacity-90 h-12 w-full">
+              {loading ? <><Loader2 className="w-4 h-4 mr-2 animate-spin" /> Analysiere…</> : <><Sparkles className="w-4 h-4 mr-2" /> Color Grading vorschlagen {!isPro && user && <span className="ml-2 text-xs opacity-80">(1 Token)</span>}</>}
             </Button>
           </div>
 

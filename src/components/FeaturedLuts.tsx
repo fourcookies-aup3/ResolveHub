@@ -1,11 +1,15 @@
+import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Download, Heart, ArrowRight } from "lucide-react";
+import { Download, Heart, ArrowRight, Crown } from "lucide-react";
 import BeforeAfterSlider from "./BeforeAfterSlider";
 import before from "@/assets/lut-before.jpg";
 import after from "@/assets/lut-after.jpg";
+import { downloadLut, luts } from "@/data/luts";
+import { toast } from "sonner";
 
 const FeaturedLuts = () => {
+  const featured = luts.find(l => l.slug === "cinematic-teal-orange")!;
   const meta = [
     { tag: "Teal & Orange", count: 412 },
     { tag: "S-Log3", count: 298 },
@@ -40,12 +44,19 @@ const FeaturedLuts = () => {
             </div>
 
             <div className="flex flex-wrap gap-3">
-              <Button className="bg-gradient-cinematic text-primary-foreground hover:opacity-90 transition-smooth">
-                <Download className="w-4 h-4 mr-2" /> LUT laden
+              <Button onClick={() => { downloadLut(featured); toast.success("Cinematic Teal & Orange.cube heruntergeladen"); }} className="bg-gradient-cinematic text-primary-foreground hover:opacity-90 transition-smooth">
+                <Download className="w-4 h-4 mr-2" /> Free LUT laden
               </Button>
-              <Button variant="outline" className="border-border hover:border-primary/50 hover:text-primary transition-smooth">
-                Alle LUTs durchsuchen <ArrowRight className="ml-2 w-4 h-4" />
-              </Button>
+              <Link to="/luts">
+                <Button variant="outline" className="border-border hover:border-primary/50 hover:text-primary transition-smooth">
+                  Alle 50+ LUTs <ArrowRight className="ml-2 w-4 h-4" />
+                </Button>
+              </Link>
+              <Link to="/pro">
+                <Button variant="ghost" className="gap-1 text-accent hover:bg-accent/10">
+                  <Crown className="w-4 h-4" /> Pro-LUTs
+                </Button>
+              </Link>
             </div>
           </div>
 
@@ -60,7 +71,7 @@ const FeaturedLuts = () => {
                 </div>
                 <div className="flex items-center gap-2">
                   <Button size="icon" variant="ghost" className="hover:text-accent transition-smooth"><Heart className="w-4 h-4" /></Button>
-                  <Button size="sm" className="bg-primary text-primary-foreground hover:bg-primary/90"><Download className="w-4 h-4 mr-1.5" /> .cube</Button>
+                  <Button size="sm" onClick={() => { downloadLut(featured); toast.success("LUT heruntergeladen"); }} className="bg-primary text-primary-foreground hover:bg-primary/90"><Download className="w-4 h-4 mr-1.5" /> .cube</Button>
                 </div>
               </div>
             </div>

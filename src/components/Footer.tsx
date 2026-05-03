@@ -3,7 +3,7 @@ import { Aperture } from "lucide-react";
 const Footer = () => {
   return (
     <footer className="border-t border-border py-12 mt-12">
-      <div className="container grid md:grid-cols-4 gap-8 text-sm">
+      <div className="container grid md:grid-cols-2 lg:grid-cols-5 gap-8 text-sm">
         <div>
           <div className="flex items-center gap-2 mb-3">
             <span className="flex items-center justify-center w-8 h-8 rounded-lg bg-gradient-cinematic">
@@ -15,7 +15,8 @@ const Footer = () => {
         </div>
         {[
           { title: "Entdecken", links: ["Tutorials", "LUTs", "Kategorien", "Top diese Woche"] },
-          { title: "Community", links: ["Beitragen", "Richtlinien", "Discord", "Newsletter"] },
+          { title: "Community", links: ["Beitragen", "Richtlinien", "Forum", "Newsletter"] },
+          { title: "Pro", links: ["Pro Upgrade", "Pro LUTs", "Pro Tutorials", "Token-Übersicht"] },
           { title: "Über", links: ["Mission", "Kontakt", "Impressum", "Datenschutz"] },
         ].map((c) => (
           <div key={c.title}>
