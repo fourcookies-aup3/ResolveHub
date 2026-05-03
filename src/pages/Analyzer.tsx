@@ -179,8 +179,8 @@ const Analyzer = () => {
 
             <Textarea value={notes} onChange={(e) => setNotes(e.target.value)} placeholder="Optional: Notizen (z.B. Skintones bewahren, mehr Kontrast)" className="bg-card border-border min-h-24" maxLength={500} />
 
-            <Button onClick={analyze} disabled={loading || !imgData} className="bg-gradient-cinematic text-primary-foreground hover:opacity-90 h-12 w-full">
-              {loading ? <><Loader2 className="w-4 h-4 mr-2 animate-spin" /> Analysiere…</> : <><Sparkles className="w-4 h-4 mr-2" /> Color Grading vorschlagen</>}
+            <Button onClick={analyze} disabled={loading || !imgData || (!isPro && !!user && remaining <= 0)} className="bg-gradient-cinematic text-primary-foreground hover:opacity-90 h-12 w-full">
+              {loading ? <><Loader2 className="w-4 h-4 mr-2 animate-spin" /> Analysiere…</> : <><Sparkles className="w-4 h-4 mr-2" /> Color Grading vorschlagen {!isPro && user && <span className="ml-2 text-xs opacity-80">(1 Token)</span>}</>}
             </Button>
           </div>
 
