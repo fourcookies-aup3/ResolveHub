@@ -37,10 +37,20 @@ const Forum = () => {
     setLoading(true);
     const { data, error } = await supabase
       .from("forum_threads")
-      .select("id,title,body,category,user_id,created_at,profiles(display_name),forum_replies(count)")
+      .select("id,title,body,category,user_id,created_at,forum_replies(count)")
       .order("created_at", { ascending: false });
     if (error) { toast.error(error.message); setLoading(false); return; }
-    setThreads((data || []).map((t: any) => ({ ...t, reply_count: t.forum_replies?.[0]?.count ?? 0 })));
+    const rows: any[] = data || [];
+    const userIds = Array.from(new Set(rows.map(r => r.user_id)));
+    const { data: profs } = userIds.length
+      ? await supabase.from("profiles").select("id,display_name").in("id", userIds)
+      : { data: [] as any[] };
+    const map = new Map((profs || []).map((p: any) => [p.id, p.display_name]));
+    setThreads(rows.map(t => ({
+      ...t,
+      profiles: { display_name: map.get(t.user_id) ?? null },
+      reply_count: t.forum_replies?.[0]?.count ?? 0,
+    })));
     setLoading(false);
   };
 

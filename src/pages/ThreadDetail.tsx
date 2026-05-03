@@ -28,10 +28,18 @@ const ThreadDetail = () => {
   const load = async () => {
     if (!id) return;
     const [{ data: t }, { data: r }] = await Promise.all([
-      supabase.from("forum_threads").select("*,profiles(display_name)").eq("id", id).maybeSingle(),
-      supabase.from("forum_replies").select("*,profiles(display_name)").eq("thread_id", id).order("created_at", { ascending: true }),
+      supabase.from("forum_threads").select("*").eq("id", id).maybeSingle(),
+      supabase.from("forum_replies").select("*").eq("thread_id", id).order("created_at", { ascending: true }),
     ]);
-    setThread(t as Thread); setReplies((r as Reply[]) || []); setLoading(false);
+    const rows: any[] = (r as any[]) || [];
+    const ids = Array.from(new Set([...(t ? [(t as any).user_id] : []), ...rows.map(x => x.user_id)]));
+    const { data: profs } = ids.length
+      ? await supabase.from("profiles").select("id,display_name").in("id", ids)
+      : { data: [] as any[] };
+    const map = new Map((profs || []).map((p: any) => [p.id, p.display_name]));
+    setThread(t ? ({ ...(t as any), profiles: { display_name: map.get((t as any).user_id) ?? null } }) : null);
+    setReplies(rows.map(x => ({ ...x, profiles: { display_name: map.get(x.user_id) ?? null } })));
+    setLoading(false);
   };
 
   useEffect(() => {
