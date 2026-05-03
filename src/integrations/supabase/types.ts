@@ -14,6 +14,24 @@ export type Database = {
   }
   public: {
     Tables: {
+      analyzer_usage: {
+        Row: {
+          created_at: string
+          id: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       forum_replies: {
         Row: {
           body: string
@@ -76,6 +94,24 @@ export type Database = {
         }
         Relationships: []
       }
+      pro_members: {
+        Row: {
+          active_until: string
+          created_at: string
+          user_id: string
+        }
+        Insert: {
+          active_until: string
+          created_at?: string
+          user_id: string
+        }
+        Update: {
+          active_until?: string
+          created_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
       profiles: {
         Row: {
           avatar_url: string | null
@@ -102,7 +138,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      is_pro: { Args: { _user_id: string }; Returns: boolean }
     }
     Enums: {
       [_ in never]: never
