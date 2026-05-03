@@ -1,0 +1,1 @@
+REVOKE EXECUTE ON FUNCTION public.is_pro(UUID) FROM PUBLIC, anon, authenticated;
