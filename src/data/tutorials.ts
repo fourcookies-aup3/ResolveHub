@@ -66,7 +66,7 @@ export const tutorials: Tutorial[] = [
       { title: "1. Color Management auf DaVinci YRGB Color Managed", body: "Project Settings → Color Management → DaVinci YRGB Color Managed." },
       { title: "2. Input Color Space pro Clip setzen", body: "Rechtsklick auf Clip → Input Color Space → z.B. Sony S-Log3 / S-Gamut3.Cine." },
       { title: "3. Timeline & Output Color Space wählen", body: "Timeline: DaVinci WG/Intermediate. Output: Rec.709 Gamma 2.4 für Web/Broadcast." },
-      { title: "4. Erste Korrektur prüfen", body: "Footage sollte nun „normal" aussehen — danach erst kreatives Grading starten." },
+      { title: "4. Erste Korrektur prüfen", body: "Footage sollte nun normal aussehen — danach erst kreatives Grading starten." },
     ]
   ),
 
