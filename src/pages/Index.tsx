@@ -1,5 +1,6 @@
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
+import FeatureGrid from "@/components/FeatureGrid";
 import Categories from "@/components/Categories";
 import FeaturedTutorials from "@/components/FeaturedTutorials";
 import FeaturedLuts from "@/components/FeaturedLuts";
@@ -12,6 +13,7 @@ const Index = () => {
       <Header />
       <main>
         <Hero />
+        <FeatureGrid />
         <Categories />
         <FeaturedTutorials />
         <FeaturedLuts />
