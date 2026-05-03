@@ -118,6 +118,33 @@ const Analyzer = () => {
           </p>
         </header>
 
+        <div className="mb-6 flex flex-wrap items-center gap-3 p-4 rounded-xl border border-border bg-card">
+          {isPro ? (
+            <>
+              <Badge className="bg-gradient-cinematic text-primary-foreground border-0 gap-1"><Crown className="w-3 h-3" /> PRO</Badge>
+              <span className="text-sm">Unbegrenzte AI-Tokens aktiv.</span>
+            </>
+          ) : user ? (
+            <>
+              <Coins className="w-5 h-5 text-accent" />
+              <span className="text-sm font-medium">{remaining} / {FREE_LIMIT} Free-Tokens übrig</span>
+              <span className="text-xs text-muted-foreground">(reset alle 30 Tage)</span>
+              <div className="flex-1" />
+              <Link to="/pro">
+                <Button size="sm" variant="outline" className="border-accent/40 text-accent hover:bg-accent/10 gap-1">
+                  <Crown className="w-3.5 h-3.5" /> Pro: unbegrenzt
+                </Button>
+              </Link>
+            </>
+          ) : (
+            <>
+              <span className="text-sm text-muted-foreground">Bitte einloggen, um den AI-Analyzer zu nutzen.</span>
+              <div className="flex-1" />
+              <Link to="/auth"><Button size="sm">Login</Button></Link>
+            </>
+          )}
+        </div>
+
         <div className="grid lg:grid-cols-2 gap-8">
           <div className="space-y-5">
             <label className="block">
