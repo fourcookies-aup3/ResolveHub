@@ -15,7 +15,8 @@ const Footer = () => {
         </div>
         {[
           { title: "Entdecken", links: ["Tutorials", "LUTs", "Kategorien", "Top diese Woche"] },
-          { title: "Community", links: ["Beitragen", "Richtlinien", "Discord", "Newsletter"] },
+          { title: "Community", links: ["Beitragen", "Richtlinien", "Forum", "Newsletter"] },
+          { title: "Pro", links: ["Pro Upgrade", "Pro LUTs", "Pro Tutorials", "Token-Übersicht"] },
           { title: "Über", links: ["Mission", "Kontakt", "Impressum", "Datenschutz"] },
         ].map((c) => (
           <div key={c.title}>
