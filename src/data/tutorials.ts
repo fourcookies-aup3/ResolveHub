@@ -30,7 +30,7 @@ export const tutorials: Tutorial[] = [
     "Primary Grade Basics: Color Wheels meistern",
     "Lerne das Fundament jedes Grades: Lift, Gamma, Gain und Offset richtig einsetzen.",
     "Anfänger", "12 min", "Cinematic", "Allgemeines Footage",
-    "qDHnCFMZ9HA", tut,
+    "Gz_QzBdHDYc", tut,
     [
       { title: "1. Footage einlesen & auf die Color-Page wechseln", body: "Importiere dein Material in den Media Pool. Wechsle über das untere Menü zur Color Page." },
       { title: "2. Scopes öffnen", body: "Aktiviere Waveform und Parade über das Scopes-Icon. Sie sind dein objektiver Kompass beim Graden." },
@@ -45,7 +45,7 @@ export const tutorials: Tutorial[] = [
     "Cinematic Teal & Orange Look",
     "Der ikonische Hollywood-Look — von Skintones bis Schatten korrekt aufgebaut.",
     "Fortgeschritten", "22 min", "Cinematic", "Outdoor / Stadt bei Nacht",
-    "FUq9qRwrDjI", hero,
+    "2AhwGMOHh-Q", hero,
     [
       { title: "1. Node-Struktur planen", body: "Node 01 Primary, Node 02 Skin Protection, Node 03 Look (Teal/Orange), Node 04 Vignette." },
       { title: "2. Skintones isolieren", body: "Auf Node 02: HSL-Qualifier auf Hauttöne. Soft auf 30. Maske invertieren für Look-Anwendung." },
@@ -61,7 +61,7 @@ export const tutorials: Tutorial[] = [
     "LOG Footage richtig konvertieren (S-Log3, V-Log, BMD Film)",
     "Korrekte Color-Space-Transformation als Basis für alle weiteren Schritte.",
     "Anfänger", "15 min", "Log Footage", "RAW / LOG Material",
-    "8AAEz1GFJxw", desert,
+    "hFZDiXbFeJQ", desert,
     [
       { title: "1. Color Management auf DaVinci YRGB Color Managed", body: "Project Settings → Color Management → DaVinci YRGB Color Managed." },
       { title: "2. Input Color Space pro Clip setzen", body: "Rechtsklick auf Clip → Input Color Space → z.B. Sony S-Log3 / S-Gamut3.Cine." },
@@ -74,7 +74,7 @@ export const tutorials: Tutorial[] = [
     "Perfekte Skintones in 5 Schritten",
     "Hauttöne natürlich und schmeichelhaft — egal welcher Look später drüber liegt.",
     "Fortgeschritten", "18 min", "Skintones", "Portrait / Interview",
-    "nYFq9HhA8Ko", vintage,
+    "1NiOIakkGV8", vintage,
     [
       { title: "1. Vectorscope mit Skin-Tone-Line aktivieren", body: "Im Vectorscope Menü die Skin-Tone-Indicator-Linie einblenden." },
       { title: "2. HSL Qualifier auf Haut", body: "Picker auf Wange, Range erweitern, Highlight aktivieren um Maske zu prüfen." },
@@ -89,7 +89,7 @@ export const tutorials: Tutorial[] = [
     "Night & Moody Grade — Cyberpunk Vibes",
     "Tief, kontrastreich, Neon-Akzente: der perfekte Nacht-Look.",
     "Profi", "28 min", "Night & Moody", "Stadt bei Nacht / Neon",
-    "QyaiHKm9CkE", cyber,
+    "RxmTgUpzH00", cyber,
     [
       { title: "1. Schwarzwert tief ankern", body: "Lift deutlich runter, Schatten Richtung Blau/Magenta drücken." },
       { title: "2. Highlights kühl mit Tint", body: "Gain in Cyan-Richtung, Sättigung der Highlights selektiv erhöhen." },
@@ -103,7 +103,7 @@ export const tutorials: Tutorial[] = [
     "Golden Hour retten & verstärken",
     "Wenn das Licht weg ist, bringst du es mit Resolve zurück.",
     "Fortgeschritten", "16 min", "Golden Hour", "Outdoor / Sonnenuntergang",
-    "Z7eYpLJ8b3M", desert,
+    "4kfiwBeH7dA", desert,
     [
       { title: "1. Belichtung anheben mit Highlights-Recovery", body: "HDR Wheels nutzen: Highlights leicht runter, Light hoch." },
       { title: "2. Warmen Tint im Gamma", body: "Gamma Richtung Orange/Yellow drücken." },
@@ -116,7 +116,7 @@ export const tutorials: Tutorial[] = [
     "Vintage Film Emulation mit DCTLs",
     "Halation, Bleach Bypass, Print-Film-LUTs realistisch kombinieren.",
     "Profi", "32 min", "Vintage / Film", "Story / Musikvideo",
-    "1qFUOqjL3iQ", vintage,
+    "AzpHKhnm-RA", vintage,
     [
       { title: "1. Print Film Emulation LUT laden", body: "FilmConvert oder freie Kodak 2383 Emulation als Input-LUT." },
       { title: "2. Halation per DCTL", body: "Roten Channel nehmen, blurren, in den Komposit zurückführen." },
@@ -129,7 +129,7 @@ export const tutorials: Tutorial[] = [
     "Clean Interview Look (Corporate / YouTube)",
     "Schmeichelhaft, neutral und konsistent — Standard für jedes Talking Head.",
     "Anfänger", "10 min", "Skintones", "Interview / YouTube",
-    "y5Yc-Ssvp_I", tut,
+    "67KjW-McIOA", tut,
     [
       { title: "1. Weißabgleich korrigieren", body: "Pipette auf neutrales Grau (Wand, Papier), Temperatur fein justieren." },
       { title: "2. Belichtung normalisieren", body: "Gain auf ~85% Waveform, Lift auf ~5%." },
@@ -142,7 +142,7 @@ export const tutorials: Tutorial[] = [
     "Multi-Cam Matching: Sony + Canon + iPhone",
     "Wie du unterschiedliches Material homogen aussehen lässt.",
     "Fortgeschritten", "26 min", "Log Footage", "Multi-Camera Setup",
-    "lWkzuT3xxqM", tut,
+    "sKD2hlhK8rE", tut,
     [
       { title: "1. Hero-Camera definieren", body: "Wähle die Kamera mit dem besten Bildprofil als Referenz." },
       { title: "2. Color Match Tool nutzen", body: "Color Chart in beiden Clips, Color Match → Apply." },
@@ -155,7 +155,7 @@ export const tutorials: Tutorial[] = [
     "Green Screen Keying & Spill Suppression",
     "Sauberer Key auch bei schwierigem Material — ohne grünen Saum.",
     "Profi", "24 min", "Compositing", "VFX / Green Screen",
-    "0gO3z-3BxN8", cyber,
+    "n5UR9XVtM28", cyber,
     [
       { title: "1. 3D Keyer aufbauen", body: "Color Page → 3D Keyer Mode, Pinsel über Greenscreen ziehen." },
       { title: "2. Matte Finesse", body: "Clean Black & Clean White anpassen, Soften & Shrink für Kanten." },
@@ -168,7 +168,7 @@ export const tutorials: Tutorial[] = [
     "Faux Anamorphic Look ohne anamorphes Objektiv",
     "Oval Bokeh, blaue Lens Flares, 2.39:1 Crop.",
     "Fortgeschritten", "14 min", "Cinematic", "Sphärisch gedrehtes Material",
-    "2tXcNJWZpks", hero,
+    "2v2lraFeoj0", hero,
     [
       { title: "1. Aspect-Ratio croppen", body: "Output-Blanking auf 2.39:1." },
       { title: "2. Blue Streak Flares", body: "ResolveFX Lens Flares → Anamorphic Streak Preset." },
@@ -180,7 +180,7 @@ export const tutorials: Tutorial[] = [
     "HDR Mastering: PQ ST.2084 Deliverable",
     "Dolby Vision-ready Grading-Pipeline.",
     "Profi", "45 min", "HDR", "HDR Master",
-    "RrPBsQyEy3o", desert,
+    "fxOpRPNsMTM", desert,
     [
       { title: "1. Color Management auf HDR PQ", body: "Output: Rec.2020 ST.2084, 1000 Nits." },
       { title: "2. HDR Wheels nutzen", body: "Color Page → Palette → HDR Wheels für mehrere Tonal-Zones." },
