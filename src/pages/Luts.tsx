@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Download, Crown, Lock, Search, Sparkles } from "lucide-react";
 import { luts, lutCategories, downloadLut, type Lut } from "@/data/luts";
 import { useIsPro } from "@/hooks/useIsPro";
+import LutPreview from "@/components/LutPreview";
 import { toast } from "sonner";
 
 const LutCard = ({ l, isPro }: { l: Lut; isPro: boolean }) => {
@@ -22,24 +23,16 @@ const LutCard = ({ l, isPro }: { l: Lut; isPro: boolean }) => {
   };
   return (
     <div className={`group relative rounded-xl border bg-card overflow-hidden transition-smooth hover:-translate-y-1 ${locked ? "border-accent/30" : "border-border hover:border-primary/50"}`}>
-      <div
-        className="aspect-video relative overflow-hidden"
-        style={{
-          background: `linear-gradient(135deg,
-            hsl(${(l.gain[0] + 1) * 30}, 70%, ${50 + l.gain[0] * 20}%) 0%,
-            hsl(${(l.gamma[1] + 1) * 60 + 180}, 60%, ${40 + l.gamma[1] * 20}%) 50%,
-            hsl(${(l.lift[2] + 1) * 90 + 200}, 70%, ${20 + l.lift[2] * 30}%) 100%)`,
-        }}
-      >
-        <div className="film-grain absolute inset-0 opacity-30" />
+      <div className="aspect-video relative overflow-hidden bg-secondary">
+        <LutPreview lut={l} />
         {l.pro && (
-          <Badge className="absolute top-2 right-2 bg-gradient-cinematic text-primary-foreground border-0 gap-1">
+          <Badge className="absolute top-2 right-2 bg-gradient-cinematic text-primary-foreground border-0 gap-1 z-10">
             <Crown className="w-3 h-3" /> PRO
           </Badge>
         )}
-        <Badge variant="outline" className="absolute top-2 left-2 bg-background/70 backdrop-blur-sm">{l.category}</Badge>
+        <Badge variant="outline" className="absolute top-2 left-2 bg-background/70 backdrop-blur-sm z-10">{l.category}</Badge>
         {locked && (
-          <div className="absolute inset-0 bg-background/70 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-smooth">
+          <div className="absolute inset-0 bg-background/70 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-smooth z-10">
             <Lock className="w-8 h-8 text-accent" />
           </div>
         )}
