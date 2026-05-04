@@ -178,6 +178,22 @@ export const luts: Lut[] = [
   L("log-convert-braw-film-look", "BRAW Film Look", "Blackmagic RAW Filmlook", "Log Convert", true, [-0.02,-0.01,0.00], [0.02,0.01,-0.01], [0.04,0.02,-0.02], 1.05, 1.15, 0.02, 0),
   L("log-convert-hlg-rec-709", "HLG → Rec.709", "HLG Tonmapping zu SDR", "Log Convert", false, [-0.01,-0.01,-0.01], [0.00,0.00,0.00], [0.03,0.03,0.03], 1, 1.1, 0, 0),
   L("log-convert-log-c4-rec-709", "LOG-C4 → Rec.709", "ARRI LogC4 Conversion", "Log Convert", true, [-0.02,-0.02,-0.02], [0.00,0.00,0.00], [0.04,0.04,0.04], 1, 1.2, 0, 0),
+  L("cinematic-aurora-borealis", "Aurora Borealis", "Grün-violetter Polarlicht-Look", "Cinematic", true, [-0.06,-0.02,0.04], [-0.02,0.02,0.02], [0.00,0.04,0.06], 1.2, 1.2, -0.04, 0.04),
+  L("cinematic-desert-mirage", "Desert Mirage", "Gelb-orange Wüsten-Hitze", "Cinematic", true, [0.02,0.00,-0.06], [0.04,0.02,-0.04], [0.10,0.06,-0.08], 1.2, 1.15, 0.1, -0.02),
+  L("cinematic-arctic-white", "Arctic White", "Eisig-blau Polar-Look", "Cinematic", true, [-0.04,-0.02,0.04], [-0.01,0.00,0.02], [0.00,0.02,0.06], 0.85, 1.2, -0.1, -0.02),
+  L("cinematic-tropical-heat", "Tropical Heat", "Sat-Knall mit Türkis", "Cinematic", true, [-0.04,-0.02,0.00], [0.02,0.02,-0.01], [0.04,0.04,0.00], 1.3, 1.15, 0.04, 0.02),
+  L("vintage-wedding-heritage", "Wedding Heritage", "Hochzeitsfilm 1980", "Vintage", false, [0.04,0.04,0.02], [0.04,0.04,0.02], [0.04,0.04,0.00], 0.9, 0.95, 0.05, 0.04),
+  L("vintage-polaroid-sun-600", "Polaroid Sun 600", "Verbrannte Highlights", "Vintage", true, [0.04,0.02,-0.02], [0.04,0.02,-0.02], [0.06,0.04,-0.04], 0.85, 0.95, 0.06, 0.04),
+  L("moody-crime-scene", "Crime Scene", "Neutrales kaltes Blau", "Moody", true, [-0.06,-0.04,0.02], [-0.02,0.00,0.00], [-0.02,0.00,0.04], 0.8, 1.25, -0.06, 0),
+  L("moody-lonely-diner", "Lonely Diner", "Warmes Tungsten in dunkel", "Moody", true, [-0.04,-0.04,-0.06], [0.04,0.02,-0.02], [0.06,0.04,-0.04], 0.95, 1.15, 0.06, 0),
+  L("natural-studio-headshot", "Studio Headshot", "Headshot-tauglich", "Natural", false, [0.00,0.00,-0.01], [0.02,0.01,0.00], [0.03,0.02,-0.01], 1.05, 1.05, 0.02, 0.02),
+  L("natural-outdoor-sport", "Outdoor Sport", "Klar, sauber, sport", "Natural", false, [-0.02,-0.01,0.00], [0.00,0.00,0.00], [0.04,0.03,0.00], 1.1, 1.15, 0, 0),
+  L("stylized-vapor-wave", "Vapor Wave", "80s Synthwave Pink-Cyan", "Stylized", true, [-0.02,-0.06,0.04], [0.02,-0.02,0.04], [0.06,0.00,0.06], 1.4, 1.1, 0, 0.06),
+  L("stylized-comic-book", "Comic Book", "Pop-Art Saturation", "Stylized", true, [-0.04,-0.02,0.00], [0.02,0.00,-0.02], [0.06,0.04,-0.02], 1.5, 1.3, 0, 0),
+  L("stylized-halloween", "Halloween", "Orange-Lila Spooky", "Stylized", true, [-0.04,-0.04,-0.02], [0.04,0.00,-0.02], [0.08,0.02,-0.02], 1.2, 1.2, 0.06, 0.04),
+  L("stylized-christmas-warm", "Christmas Warm", "Kerzenschein-Look", "Stylized", true, [0.02,0.00,-0.04], [0.04,0.02,-0.02], [0.08,0.04,-0.06], 1.05, 1.05, 0.1, 0.02),
+  L("log-convert-sony-venice-rec-709", "Sony Venice → Rec.709", "Sony Venice S-Gamut3", "Log Convert", true, [-0.02,-0.02,-0.02], [0.00,0.00,0.00], [0.04,0.04,0.04], 1, 1.2, 0, 0),
+  L("log-convert-phantom-raw-709", "Phantom RAW → 709", "Phantom Hi-Speed RAW", "Log Convert", true, [-0.02,-0.02,-0.02], [0.00,0.00,0.00], [0.04,0.04,0.04], 1, 1.2, 0, 0),
 ];
 
 export const lutCategories = Array.from(new Set(luts.map(l => l.category)));
