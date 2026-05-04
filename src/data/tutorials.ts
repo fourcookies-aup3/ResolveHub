@@ -293,3 +293,8 @@ export const tutorials: Tutorial[] = [
     ]
   ),
 ];
+
+export const categories = Array.from(new Set(tutorials.map(t => t.category)));
+export const levels = ["Anfänger","Fortgeschritten","Profi"] as const;
+
+export const getTutorial = (slug: string) => tutorials.find(t => t.slug === slug);
