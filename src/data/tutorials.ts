@@ -187,9 +187,109 @@ export const tutorials: Tutorial[] = [
       { title: "3. Dolby Vision Trim Pass", body: "Workflows → Dolby Vision → Analyze → Trims für 100/600 Nits." },
     ]
   ),
+
+  make("retro-vhs-look",
+    "Retro VHS / 80s Look",
+    "Magenta-Cast, Bandverzerrung und gelifteter Schwarzwert für authentischen VHS-Vibe.",
+    "Anfänger", "11 min", "Vintage / Film", "Musikvideo / Retro",
+    "qoHdMRk5864", vintage,
+    [
+      { title: "1. Lift Richtung Magenta", body: "Lift-Wheel leicht Richtung Magenta-Lila ziehen, Schwarzwert auf ~10% lifteln." },
+      { title: "2. Saturation reduzieren", body: "Globale Sat auf 0.8 — VHS war nie sehr farbgenau." },
+      { title: "3. Soft Glow + Chromatic Aberration", body: "ResolveFX Soft Glow, leichte Aberration via Lens Distortion." },
+      { title: "4. Scanlines & Noise overlay", body: "Generator → Noise + Lined Pattern, Composite Mode 'Overlay' bei 15%." },
+    ],
+    ["VHS hatte 240 sichtbare Linien — minimal komprimieren für Authentizität."]
+  ),
+
+  make("anime-pop-grade",
+    "Anime / Cell-Shaded Look",
+    "Übersättigte Pop-Farben mit weichen Highlights — ideal für stylized Content.",
+    "Fortgeschritten", "14 min", "Stylized", "Stylized / Animation",
+    "WWPzENHUGXk", cyber,
+    [
+      { title: "1. Saturation deutlich anheben", body: "Globale Sat auf 1.5, Highlights leicht entsättigen für die Soft-Spots." },
+      { title: "2. Hue vs Hue Shifts", body: "Grün-Töne Richtung Cyan, Rot Richtung Magenta drücken." },
+      { title: "3. Posterize-Effekt mild", body: "OFX Posterize mit 8-12 Levels, Mix 30%." },
+      { title: "4. Outline via Edge Detect", body: "Parallel-Node mit Edge Detect, schwarze Linien minimal überlagern." },
+    ]
+  ),
+
+  make("bleach-bypass-grade",
+    "Bleach Bypass — der 'Saving Private Ryan' Look",
+    "Hoher Kontrast, entsättigte Mids, silbriger Schein.",
+    "Fortgeschritten", "13 min", "Vintage / Film", "Krieg / Drama",
+    "VyYMbqR_X9M", vintage,
+    [
+      { title: "1. Sättigung halbieren", body: "Globale Saturation auf 0.5 setzen." },
+      { title: "2. Kontrast deutlich erhöhen", body: "Contrast auf 1.3, Pivot leicht nach unten verschieben." },
+      { title: "3. Cool Cast in Schatten", body: "Lift Richtung Cyan-Blau für den 'metallischen' Schein." },
+      { title: "4. Korn hinzufügen", body: "Film Grain 5219 mit Strength 0.6 für rauen Look." },
+    ]
+  ),
+
+  make("pastel-dream-grade",
+    "Pastel Dream — Wedding & Lifestyle",
+    "Verträumter Pastell-Look mit angehobenen Schwarzwerten.",
+    "Anfänger", "9 min", "Stylized", "Wedding / Lifestyle",
+    "VyYMbqR_X9M", vintage,
+    [
+      { title: "1. Lift deutlich anheben", body: "Lift +0.05 für den 'milky' Look, Schwarzwerte verschwinden." },
+      { title: "2. Sättigung leicht senken", body: "Sat auf 0.85 für sanfte Pastell-Töne." },
+      { title: "3. Gamma Richtung Pink", body: "Mids leicht Richtung Magenta-Rosa." },
+      { title: "4. Soft Bloom", body: "ResolveFX Glow mit niedriger Intensity (~0.2)." },
+    ]
+  ),
+
+  make("blockbuster-action",
+    "Blockbuster Action Grade",
+    "Hochkontrastiger Action-Look à la Michael Bay — knackig, warm, episch.",
+    "Profi", "20 min", "Cinematic", "Action / Trailer",
+    "1-5mXPEsm3k", hero,
+    [
+      { title: "1. Crushed Blacks", body: "Lift -0.08, schwarze Bereiche tief absenken für dramatische Schatten." },
+      { title: "2. Warm Highlights", body: "Gain Richtung Orange-Gelb, Sättigung der Highlights anheben." },
+      { title: "3. Selective Saturation", body: "Sat vs Lum: Mids deutlich sättigen, Highlights leicht entsättigen." },
+      { title: "4. Anamorphic Crop + Flares", body: "2.39:1 Crop, blue Streak Flares auf Highlights." },
+    ]
+  ),
+
+  make("documentary-natural",
+    "Documentary Natural Grade",
+    "Ehrlich, neutral, aber dennoch professionell aussehend — für Doku & Reportage.",
+    "Anfänger", "12 min", "Natural", "Doku / Reportage",
+    "TYi_y5cjFkY", tut,
+    [
+      { title: "1. Weißabgleich präzise korrigieren", body: "Pipette auf Grau, dann Feinkorrektur via Temperatur/Tint." },
+      { title: "2. Subtile Sat-Anhebung", body: "Sat auf 1.05 — minimal, damit es nicht 'graded' aussieht." },
+      { title: "3. Highlight Recovery", body: "HDR Wheels: Highlights -0.1 für überstrahltes Licht." },
+      { title: "4. Konsistenz zwischen Clips", body: "Per Group Pre-Clip einheitliche Basis-Korrektur." },
+    ]
+  ),
+
+  make("music-video-punch",
+    "Music Video Color Punch",
+    "Knallige, gesättigte Farben mit hohem Kontrast für Musikvideos.",
+    "Fortgeschritten", "17 min", "Stylized", "Musikvideo",
+    "5h12LYZlvzI", cyber,
+    [
+      { title: "1. Hard Contrast Curve", body: "S-Kurve auf Custom Curves — Highlights und Schatten verstärken." },
+      { title: "2. Color Boost", body: "Sat auf 1.4, Color Boost OFX hinzu." },
+      { title: "3. Komplementäre Looks pro Cut", body: "Pro Szene andere Komplementärfarben — Energie durch Wechsel." },
+      { title: "4. Fast Vignettes", body: "Power Window mit hartem Falloff für visuellen Beat." },
+    ]
+  ),
+
+  make("horror-grade",
+    "Horror Color Grade — Green Cast",
+    "Beklemmende Atmosphäre durch grünlichen Cast und tiefe Schatten.",
+    "Fortgeschritten", "15 min", "Night & Moody", "Horror / Thriller",
+    "IFVf6OJZcG4", cyber,
+    [
+      { title: "1. Green Cast in Mids", body: "Gamma deutlich Richtung Grün-Gelb." },
+      { title: "2. Tiefe, kalte Schatten", body: "Lift Richtung Blau-Grün, sehr tief." },
+      { title: "3. Skintones leicht entsättigen", body: "HSL Qualifier auf Haut, Sat -20." },
+      { title: "4. Vignette + Korn", body: "Harte Vignette, schweres Filmkorn für Unbehagen." },
+    ]
+  ),
 ];
-
-export const categories = Array.from(new Set(tutorials.map(t => t.category)));
-export const levels = ["Anfänger","Fortgeschritten","Profi"] as const;
-
-export const getTutorial = (slug: string) => tutorials.find(t => t.slug === slug);
