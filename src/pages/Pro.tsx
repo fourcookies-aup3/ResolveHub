@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -22,19 +22,35 @@ const Pro = () => {
   const { user } = useAuth();
   const { isPro, activeUntil, loading } = useIsPro();
   const nav = useNavigate();
+  const [params] = useSearchParams();
   const [submitting, setSubmitting] = useState(false);
+  const [portalLoading, setPortalLoading] = useState(false);
+
+  useEffect(() => {
+    if (params.get("success") === "true" && user) {
+      toast.success("Zahlung erfolgreich — Pro wird aktiviert…");
+      supabase.functions.invoke("check-subscription").then(() => {
+        setTimeout(() => window.location.replace("/pro"), 1500);
+      });
+    }
+    if (params.get("canceled") === "true") toast.info("Zahlung abgebrochen.");
+  }, [params, user]);
 
   const upgrade = async () => {
     if (!user) { nav("/auth"); return; }
     setSubmitting(true);
-    const until = new Date(); until.setDate(until.getDate() + 30);
-    const { error } = await supabase.from("pro_members").upsert({
-      user_id: user.id, active_until: until.toISOString(),
-    }, { onConflict: "user_id" });
+    const { data, error } = await supabase.functions.invoke("create-checkout");
     setSubmitting(false);
-    if (error) { toast.error(error.message); return; }
-    toast.success("Willkommen bei ResolveHub Pro 🎉");
-    setTimeout(() => window.location.reload(), 800);
+    if (error || !data?.url) { toast.error(error?.message ?? "Checkout fehlgeschlagen"); return; }
+    window.location.href = data.url;
+  };
+
+  const openPortal = async () => {
+    setPortalLoading(true);
+    const { data, error } = await supabase.functions.invoke("customer-portal");
+    setPortalLoading(false);
+    if (error || !data?.url) { toast.error(error?.message ?? "Portal nicht verfügbar"); return; }
+    window.location.href = data.url;
   };
 
   return (
@@ -82,16 +98,21 @@ const Pro = () => {
               ))}
             </ul>
             {isPro ? (
-              <div className="text-center p-3 rounded-lg bg-primary/10 border border-primary/30 text-sm">
-                <p className="font-semibold text-primary flex items-center justify-center gap-1.5"><Crown className="w-4 h-4" /> Du bist Pro</p>
-                {activeUntil && <p className="text-xs text-muted-foreground mt-1">Aktiv bis {new Date(activeUntil).toLocaleDateString()}</p>}
+              <div className="space-y-3">
+                <div className="text-center p-3 rounded-lg bg-primary/10 border border-primary/30 text-sm">
+                  <p className="font-semibold text-primary flex items-center justify-center gap-1.5"><Crown className="w-4 h-4" /> Du bist Pro</p>
+                  {activeUntil && <p className="text-xs text-muted-foreground mt-1">Aktiv bis {new Date(activeUntil).toLocaleDateString()}</p>}
+                </div>
+                <Button onClick={openPortal} disabled={portalLoading} variant="outline" className="w-full">
+                  {portalLoading ? "Öffne…" : "Abo verwalten"}
+                </Button>
               </div>
             ) : (
               <Button onClick={upgrade} disabled={submitting || loading} className="w-full bg-gradient-cinematic text-primary-foreground hover:opacity-90 h-12">
-                <Zap className="w-4 h-4 mr-2" /> {submitting ? "Aktiviere…" : "Pro freischalten"}
+                <Zap className="w-4 h-4 mr-2" /> {submitting ? "Lade Checkout…" : "Pro freischalten"}
               </Button>
             )}
-            <p className="text-[10px] text-muted-foreground text-center mt-3">Demo-Aktivierung — Payment-Integration folgt.</p>
+            <p className="text-[10px] text-muted-foreground text-center mt-3">Sichere Zahlung via Stripe. Jederzeit kündbar.</p>
           </div>
         </div>
 
