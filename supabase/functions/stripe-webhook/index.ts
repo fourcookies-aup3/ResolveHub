@@ -92,6 +92,22 @@ Deno.serve(async (req) => {
             sub.metadata = { ...sub.metadata, user_id: session.metadata.user_id };
           }
           await applySubscription(sub);
+        } else if (session.mode === "payment" && session.metadata?.kind === "lut_purchase") {
+          const userId = session.metadata.user_id;
+          const lutSlug = session.metadata.lut_slug;
+          if (userId && lutSlug && session.payment_status === "paid") {
+            const { error } = await admin.from("lut_purchases").upsert(
+              {
+                user_id: userId,
+                lut_slug: lutSlug,
+                stripe_session_id: session.id,
+                amount_cents: session.amount_total ?? null,
+              },
+              { onConflict: "user_id,lut_slug" },
+            );
+            if (error) console.error("lut_purchases upsert error", error.message);
+            else console.log("webhook: LUT purchased", userId, lutSlug);
+          }
         }
         break;
       }
