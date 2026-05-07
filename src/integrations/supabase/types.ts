@@ -94,6 +94,33 @@ export type Database = {
         }
         Relationships: []
       }
+      lut_purchases: {
+        Row: {
+          amount_cents: number | null
+          created_at: string
+          id: string
+          lut_slug: string
+          stripe_session_id: string | null
+          user_id: string
+        }
+        Insert: {
+          amount_cents?: number | null
+          created_at?: string
+          id?: string
+          lut_slug: string
+          stripe_session_id?: string | null
+          user_id: string
+        }
+        Update: {
+          amount_cents?: number | null
+          created_at?: string
+          id?: string
+          lut_slug?: string
+          stripe_session_id?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
       pro_members: {
         Row: {
           active_until: string
@@ -139,6 +166,7 @@ export type Database = {
     }
     Functions: {
       is_pro: { Args: { _user_id: string }; Returns: boolean }
+      owns_lut: { Args: { _slug: string; _user_id: string }; Returns: boolean }
     }
     Enums: {
       [_ in never]: never
